@@ -15,69 +15,52 @@ def create_write_bg():
     cv2.destroyAllWindows()
 
 # ---------------------------------------------------------
-# ทดสอบการกำจัด Still ที่ซ้อนกันมากกว่า 1 คำขึ้นไป และ กำจัด Still ที่อยู่หน้า และ ท้าย ของลิสต์ Gloss_sequence
+# ทดสอบการกำจัด Still ที่ซ้อนกันมากกว่า 1 คำขึ้นไป
 # ---------------------------------------------------------
 def merge_still():
-    example_gloss_sequence = ["", "", "i", "", "", "love", "", "", "you", "", "", ""]
-    example_gloss_sequence_1 = ["", "i", "", "love", "", "you", ""]
-    final_gloss_sequence = []
-    flags = False
-    
-    for i in example_gloss_sequence:
-        if (flags):
-            if (i != ""):
-                final_gloss_sequence.append(i)
-                flags = False
-        else:
-            if (i == ""):
-                final_gloss_sequence.append(i)
-                flags = True
+    data_dict = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+    final_sequence_for_show = []
+    final_sequence_for_motion = []
+    group = []
 
-    print(f"Before: {final_gloss_sequence}")
-    # print(len(final_gloss_sequence))
+    # input_sequence จะได้มาจาก Gemini ที่ผมอยากให้ Gemini ส่งเวอร์ชันแรกของการทำ Tokenization มาก่อน แบบก่อนที่จะไปดูคำในลิสต์ และให้ผลลัพธ์มาเป็นคำ และ empty string อะ
+    input_sequence = ['z', 'e', 'k', 'o', 'b', 'c', 'l', 'm', 'n', 'd', 'p']
+    # output_sequence เป็นสิ่งที่ได้มาจาก Gemini ที่ผา่นการดูคำใน Dict มาแล้วว่าคำไหนมี (ถ้ามีก็ให้เก็บเป็นคำนั้นเลย หรือ คำที่ใกล้เคียงกับบริบทที่สุด) และ ไม่มี (ถ้าไม่มี ให้เก็บเป็น empty string)
+    output_sequence = ['empty_string', 'e', 'empty_string', 'empty_string', 'b', 'c', 'empty_string', 'empty_string', 'empty_string', 'd', 'empty_string']
 
-    # ผมเขียนเงื่อนไขตรงนี้ เพราะว่า ผมคิดว่า ท่าไม่มีท่าที่ทำอะไรเลย (ซึ่งก็คือท่ายืนนิ่ง) ที่อยู่ในท่าเริ่มต้น และ ท่าจบ ซึ่งถ้าเป็นเช่นนั้นแล้ว เราก็ไม่ต้องแสดงก็ได้ เพราะมันไม่มีประโยชน์อะไรที่จะแสดงในเมื่อมันไม่มี
-    if (final_gloss_sequence[0] == ""):
-        final_gloss_sequence.pop(0)
-    if (final_gloss_sequence[len(final_gloss_sequence) - 1] == ""):
-        final_gloss_sequence.pop(len(final_gloss_sequence) - 1)
-
-    print(f"After: {final_gloss_sequence}")
-
-    # - - - นำโค้ดที่ผมเขียนนี้ ไปใส่เอาไว้ด้านบนสุดในฟังก์ชัน create_overlay_from_json() เพื่อทำการจัดการ list ใหม่ จากนั้นเอา list ผลลัพธ์ (ซึ่งในที่นี้คือ final_gloss_sequence) ไปทำงานต่อ หรือว่า เอาไปแทนลิสต์เวอร์ชันเก่านั่นแหละครับ
-    # เพิ่มเติม : ไม่จำเป็นต้องสร้างฟังก์ชันใหม่นะครับ แค่เอาโค้ดในฟังก์ชัน merge_still() ไปใส่ใน ฟังก์ชัน create_overlay_from_json() บรรทัดบนสุดเลย หรือว่าใส่ล่าง obj การสร้าง video ก้ได้
-    # ตัวอย่างการใส่โค้ดใน create_overlay_from_json
-    # def create_stick_figure(gloss_sequence, motion_dict_dir, result_output_path, fps, frame_width, frame_height, result_name):
-    #     os.makedirs(result_output_path, exist_ok = True)
-    #     output = os.path.join(result_output_path, result_name)
-
-    #     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    #     out = cv2.VideoWriter(output, fourcc, fps, (frame_width, frame_height))
-
-    #     final_gloss_sequence = []
-    #     flags = False
+    for i in range(len(output_sequence)):
+        out_token = output_sequence[i]
         
-    #     for i in gloss_sequence:
-    #         if (flags):
-    #             if (i != ""):
-    #                 final_gloss_sequence.append(i)
-    #                 flags = False
-    #         else:
-    #             if (i == ""):
-    #                 final_gloss_sequence.append(i)
-    #                 flags = True
+        if out_token == 'empty_string':
+            # ถ้าเป็น empty_string ให้เก็บคำจาก input_sequence ลงใน group สะสมไปเรื่อยๆ
+            group.append(input_sequence[i])
+        else:
+            # ถ้ามีของใน group สะสมอยู่ (แปลว่าก่อนหน้านี้มี empty_string)
+            if len(group) > 0:
+                if len(group) == 1:
+                    final_sequence_for_show.append(group[0])
+                else:
+                    final_sequence_for_show.append(group)
+                
+                final_sequence_for_motion.append('still')
+                group = [] # รีเซ็ต group ให้ว่างเปล่าเพื่อรอสะสมคำใหม่
+            
+            # เก็บคำปกติลงในลิสต์ผลลัพธ์
+            final_sequence_for_show.append(out_token)
+            final_sequence_for_motion.append(out_token)
 
-    #     if (final_gloss_sequence[0] == ""):
-    #         final_gloss_sequence.pop(0)
-    #     if (final_gloss_sequence[len(final_gloss_sequence) - 1] == ""):
-    #         final_gloss_sequence.pop(len(final_gloss_sequence) - 1)
+    # เช็คว่ามี group หลงเหลืออยู่ที่ท้าย sequence หรือไม่
+    if len(group) > 0:
+        if len(group) == 1:
+            final_sequence_for_show.append(group[0])
+        else:
+            final_sequence_for_show.append(group)
+        final_sequence_for_motion.append('still')
 
-    #     for i in final_gloss_sequence:
-    #         # - - - ทำงานเหมือนเดิมในฟังก์ชันนี้ - - -
+    print(f"final_sequence_for_show: {final_sequence_for_show}")
+    print(f"final_sequence_for_motion: {final_sequence_for_motion}")
 
 
 if __name__ == "__main__":
     # create_write_bg()
     merge_still()
-
-    
