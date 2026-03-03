@@ -70,20 +70,25 @@ def create_subfolder(main_storage_path):
 # ---------------------------------------------------------
 # ฟังก์ชันสร้าง Folder ของคำภาษาไทยนั้นๆ ในหมวดหมู่ของตัวอักษรนั้นๆ
 # ---------------------------------------------------------
-def create_destination_dir(path_dir, word_tsl_name):
-    dest_dir = os.path.join(path_dir, word_tsl_name)
-    try:
-        os.makedirs(dest_dir)
-    except FileExistsError:
-        # print(f"One or more directories in '{dest_dir}' already exist.")
-        return dest_dir
-    except PermissionError:
-        print(f"Permission denied: Unable to create '{dest_dir}'.")
-    except Exception as e:
-        print(f"Error: {e}")
-    
-    return dest_dir
+def create_destination_dir(root_path, word_tsl_name):
+    # 1. โฟลเดอร์หมวดหมู่ตัวอักษรตัวแรก เช่น 'ก' จากคำว่า 'กิน'
+    first_char = word_tsl_name[0]
+    category_path = os.path.join(root_path, first_char)
+    os.makedirs(category_path, exist_ok=True)
 
+    # 2. โฟลเดอร์ชื่อคำศัพท์ เช่น 'MOTION_DICT/ก/กิน'
+    word_path = os.path.join(category_path, word_tsl_name)
+    os.makedirs(word_path, exist_ok=True)
+
+    # 3. เป็นการหาว่าในโฟลเดอร์ของคำภาษามือไทยคำนั้นมีกี่เวอร์ชันแล้ว
+    existing_versions = [v for v in os.listdir(word_path) if (os.path.isdir(os.path.join(word_path, v)))]
+    next_version = f"v{len(existing_versions) + 1}"
+
+    # 4. สร้างโฟลเดอร์เวอร์ชันล่าสุด ตัวอย่า่ง 'MOTION_DICT/ก/กิน/v1'
+    final_destination = os.path.join(word_path, next_version)
+    os.makedirs(final_destination, exist_ok=True)
+
+    return final_destination
 # ---------------------------------------------------------
 # ฟังก์ชันการทำงานหลัก
 # ---------------------------------------------------------

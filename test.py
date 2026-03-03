@@ -1,4 +1,5 @@
 import cv2
+import os
 import numpy as np
 
 # ---------------------------------------------------------
@@ -60,7 +61,65 @@ def merge_still():
     print(f"final_sequence_for_show: {final_sequence_for_show}")
     print(f"final_sequence_for_motion: {final_sequence_for_motion}")
 
+def create_destination_dir():
+    word = "TANK"
+    word_path = r"E:\Download\MOTION_DICT\T\TEACH"
+    existing_versions = [d for d in os.listdir(word_path) if os.path.isdir(os.path.join(word_path, d))]
+    next_version = f"v{len(existing_versions) + 1}"
+    print(next_version)
+
+def manage_name():
+    """
+    ห้ามมีสิ่งเหล่านี้อยู่ใน Path
+    \ / : * ? " < > |
+    """
+
+    seperate_mark = ["(", ":", "/"]
+    word = [
+        "ครู (ท่าทางที่1)",
+        "ฝรั่งเศส :สาธารณรัฐฝรั่งเศส (ท่ามือที่1 เป็นท่ามือไทย)",
+        "แพทย์ / หมอ",
+        "เอเซียทีค เดอะ ริเวอร์ ฟรอนต์ (ท่าที่1)",
+        "เกิน",
+        "ฟุตบอล เอฟซี"
+    ]
+    base_word = ""
+    context = ""
+    flag = True
+
+    for i in word:
+        for j in i:
+            if j in seperate_mark:
+                if j == "(":
+                    flag = False
+                    txt = i.split(j, 1)
+                    base_word = txt[0].strip()
+                    context = txt[1].replace(")", " ").strip()
+                    break
+                elif j == ":":
+                    flag = False
+                    txt = i.split(j, 1)
+                    base_word = txt[0].strip()
+                    context = txt[1].strip()
+                    break
+                elif j == "/":
+                    flag = False
+                    base_word = i.replace("/", "หรือ").replace(" ", "_").strip()
+                    context = "ท่าปกติ (ไม่มีคำอธิบายเพิ่มเติม)"
+                    break
+        
+        if (flag):
+            base_word = i.replace(" ", "_").strip()
+            context = "ท่าปกติ (ไม่มีคำอธิบายเพิ่มเติม)"
+            print(f"B: {base_word}, C: {context}")
+        else:
+            print(f"B: {base_word}, C: {context}")
+
+    
 
 if __name__ == "__main__":
+    print("Test.py")
     # create_write_bg()
-    merge_still()
+    # merge_still()
+    # create_destination_dir()
+    manage_name()
