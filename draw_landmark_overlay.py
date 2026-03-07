@@ -87,7 +87,7 @@ def draw_skeleton(frame, pose_data, left_hand_data, right_hand_data, width, heig
 # ฟังก์ชันสร้าง Overlay จากไฟล์ JSON
 # ---------------------------------------------------------
 def create_overlay_from_json(input_video_path, motion_json_path, output_overlay_path, word_tsl_name):
-    dest_overlay_path = os.path.join(output_overlay_path, "overlay.mp4")
+    dest_overlay_path = os.path.join(output_overlay_path, f"{word_tsl_name}.mp4")
     # print(dest_overlay_path)
 
     with open(motion_json_path, 'r', encoding='utf-8') as reader:
@@ -129,14 +129,40 @@ def create_overlay_from_json(input_video_path, motion_json_path, output_overlay_
         out.release()
     else:
         print("Please select the video clip that matches the motion.js file.")
+        cap.release()
+        return
     
     cap.release()
     print(f"{word_tsl_name} overlay is saved at: {dest_overlay_path}")
 
 if __name__ == "__main__":
     print("Executed draw_landmark.py file directly.")
-    input_video_path = r"E:\Code\Text-to-ThaiSignLanguage\input\today.mp4"
-    motion_json_path = r"E:\Download\MOTION_DICT\T\TODAY\motion.json"
-    output_overlay_path = r"E:\Download\MOTION_DICT\T\TODAY"
-    word_tsl_name = "TODAY"
-    create_overlay_from_json(input_video_path, motion_json_path, output_overlay_path, word_tsl_name)
+
+    input_video_path_list = [
+        "E:\\Download\\CLIP_WORD_DICT-1\\ข\\เข้าใจ\\v1\\original.mp4",
+        "E:\\Download\\CLIP_WORD_DICT-1\\ค\\เครียด\\v1\\original.mp4",
+        "E:\\Download\\CLIP_WORD_DICT-1\\ง\\เงินกู้\\v1\\original.mp4",
+        "E:\\Download\\CLIP_WORD_DICT-1\\จ\\เจริญ\\v1\\original.mp4"
+    ]
+
+    motion_json_path_list = [
+        "E:\\Download\\MOTION_DICT-1\\ข\\เข้าใจ\\v1\\motion.json",
+        "E:\\Download\\MOTION_DICT-1\\ค\\เครียด\\v1\\motion.json",
+        "E:\\Download\\MOTION_DICT-1\\ง\\เงินกู้\\v1\\motion.json",
+        "E:\\Download\\MOTION_DICT-1\\จ\\เจริญ\\v1\\motion.json"
+    ]
+
+    word_tsl_name_list = [
+        "เข้าใจ",
+        "เครียด",
+        "เงินกู้",
+        "เจริญ"
+    ]
+
+    for i in range(len(word_tsl_name_list)):
+        input_video_path = input_video_path_list[i]
+        motion_json_path = motion_json_path_list[i]
+        output_overlay_path = r"E:\Download\OUTPUT_TEST\video"
+        word_tsl_name = word_tsl_name_list[i]
+        create_overlay_from_json(input_video_path, motion_json_path, output_overlay_path, word_tsl_name)
+        

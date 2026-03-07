@@ -54,14 +54,15 @@ def extract_hands_landmarks(landmarks_obj):
 # ---------------------------------------------------------
 # ฟังก์ชันการแปลงคลิปวิดีโอเป็นข้อมูลการเคลื่อนไหวของพิกัดร่างกาย และมือ
 # ---------------------------------------------------------
-def process_sign_language_video(word_name, input_video, base_path):
-    output_json_path = os.path.join(base_path, "motion.json")
+def process_sign_language_video(input_video, motion_path):
+    # output_json_path = os.path.join(base_path, "motion.json")
     # print(f"base_path has value: {base_path}")
     # print(f"destination directory of json file at {output_json_path}")
     # return 1
 
     if not os.path.exists(input_video):
         print(f"Error: not found original input video at {input_video}")
+        return
 
     cap = cv2.VideoCapture(input_video)
     fps = cap.get(cv2.CAP_PROP_FPS)
@@ -112,11 +113,10 @@ def process_sign_language_video(word_name, input_video, base_path):
     cap.release()
 
     # สร้างไฟล์ motion.json ลงในโฟลเดอร์ของคำนั้นๆ
-    with open(output_json_path, "w", encoding="utf-8") as writer:
+    with open(motion_path, "w", encoding="utf-8") as writer:
         json.dump(json_data, writer, indent=4)
     
-    print(f"{word_name} has motion.json that saved at {output_json_path}")
-
+    # print(f"{word_name} has motion.json that saved at {output_json_path}")
 
 
 if __name__ == "__main__":
