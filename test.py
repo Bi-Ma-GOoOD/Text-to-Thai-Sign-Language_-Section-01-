@@ -115,11 +115,18 @@ def manage_name():
         else:
             print(f"B: {base_word}, C: {context}")
 
-    
+def test_walk(base_dir):
+    for root, dirs, files in os.walk(base_dir):
+        print("Current directory:", root)
+        print("Subdirectories:", dirs)
+        print("Files:", files)
+        print('----------------')    
 
 if __name__ == "__main__":
     print("Test.py")
+    base_dir = r"E:\Download\MOTION_DICT"
     # create_write_bg()
     # merge_still()
     # create_destination_dir()
-    manage_name()
+    # manage_name()
+    test_walk(base_dir)

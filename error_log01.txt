@@ -1,0 +1,37 @@
+--- Log การดาวน์โหลดที่ผิดพลาด ---
+(SKIPPED) URL: https://www.th-sl.com/hand/9-008/ | Desp: This context already have in this แอสตราเซเนก้า, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/9-006/ | Desp: This context already have in this โมเดอร์นา, skip dowload.
+(Error) URL: https://www.th-sl.com/word/5-66-1/ | Error: Video not found!
+(Error) URL: https://www.th-sl.com/word/6-27-1/ | Error: Video not found!
+(Error) URL: https://www.th-sl.com/word/4-112-1/ | Error: Video not found!
+(Error) URL: https://www.th-sl.com/word/4-112-2/ | Error: Video not found!
+(Error) URL: https://www.th-sl.com/word/4-114-1/ | Error: Video not found!
+(Error) URL: https://www.th-sl.com/word/4-89-1/ | Error: 521 Server Error: <none> for url: https://www.th-sl.com/word/4-89-1/
+(Error) URL: https://www.th-sl.com/word/1-75-2/ | Error: Video not found!
+(SKIPPED) URL: https://www.th-sl.com/hand/2567-1554/ | Desp: This context already have in this เราเตอร์, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2567-1377/ | Desp: This context already have in this สี่เหลี่ยม, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/word/66-200-1014/ | Desp: This context already have in this กรุงเทพธนบุรี, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/word/66-200-1010/ | Desp: This context already have in this ขอนแก่น, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/word/66-200-1005/ | Desp: This context already have in this กรุงเทพ, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/word/66-200-1001/ | Desp: This context already have in this เชียงใหม่, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/word/66-200-1000/ | Desp: This context already have in this รามคำแหง, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2566-0696/ | Desp: This context already have in this พุทธมณฑล, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2566-0694/ | Desp: This context already have in this นครชัยศรี, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2566-0673/ | Desp: This context already have in this เฟซบุ๊ก, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2566-0675/ | Desp: This context already have in this ไลน์, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2566-0649/ | Desp: This context already have in this แฟลช_เอ็กซ์เพรส, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2566-0648/ | Desp: This context already have in this แฟลช_เอ็กซ์เพรส, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2566-0647/ | Desp: This context already have in this แฟลช_เอ็กซ์เพรส, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2566-0645/ | Desp: This context already have in this เจแอนด์ที, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2566-0643/ | Desp: This context already have in this เคอรี่, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2566-0597/ | Desp: This context already have in this พญาไท, skip dowload.
+(Error) URL: https://www.th-sl.com/hand/2565-0256/ | Error: Video not found!
+(SKIPPED) URL: https://www.th-sl.com/hand/8-33-2/ | Desp: This context already have in this วัน, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2567-1530/ | Desp: This context already have in this วันนี้, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2568-0288/ | Desp: This context already have in this ลาดกระบัง, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2569-0103/ | Desp: This context already have in this ชัยวุฒิ_ธนาคมานุสรณ์, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2569-0110/ | Desp: This context already have in this ธรรมนัส_พรหมเผ่า, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2569-0127/ | Desp: This context already have in this วันมูหะมัดนอร์_มะทา, skip dowload.
+(SKIPPED) URL: https://www.th-sl.com/hand/2569-0135/ | Desp: This context already have in this เสรีพิศุทธ์_เตมียเวส, skip dowload.
+(Error) URL: https://www.th-sl.com/word/1-85-2/ | Error: Video not found!
+(Error) URL: https://www.th-sl.com/word/6-114-1-2/ | Error: Video not found!

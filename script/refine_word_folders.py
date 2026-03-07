@@ -33,7 +33,29 @@ def rename_folders_with_spaces(base_dir):
     
     print(f"Processing successfully!! folder name changed {count} folders")
 
+def find_variant_on_word_folder(base_dir):
+    print("Investigating which word_folder has varaint..")
+    
+    count = 0
+
+    if not os.path.exists(base_dir):
+        print("Can't find base_dir path")
+        return
+
+    for category in os.listdir(base_dir):
+        category_path = os.path.join(base_dir, category)
+
+        if os.path.isdir(category_path):
+            for word_folder in os.listdir(category_path):
+                if (("ท่าที่1" in word_folder) or ("แบบที่1" in word_folder)):
+                    target = os.path.join(category_path, word_folder)
+                    print(f"Here: {target}")
+                    count += 1
+
+    print(f"We found word_folder has variant {count} folders.")
+
 
 if __name__ == "__main__":
     base_dir = r"E:\Download\MOTION_DICT-1"
-    rename_folders_with_spaces(base_dir)
+    # rename_folders_with_spaces(base_dir)
+    find_variant_on_word_folder(base_dir)

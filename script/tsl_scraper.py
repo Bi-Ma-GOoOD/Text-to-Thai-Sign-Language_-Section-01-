@@ -19,7 +19,7 @@ def get_first_consonant(base_word):
     if (char != ""):
         return char
     else:
-        return base_word[0]
+        return base_word[0].upper()
 
 def process_single_url(word_url, base_dir):
     # ------------------------------------------------
@@ -94,9 +94,9 @@ def process_single_url(word_url, base_dir):
     p = Path(base_dir)
 
     # ตรวจสอบก่อนว่า มีโฟลเดอร์ที่ชื่อว่า Motion_dict หรือยัง เพราะระบบจะเก็บค่าการเคลื่อนที่และคำศัพท์ต่างๆ อยู่ในนี้
-    if p.name.upper() != "MOTION_DICT-1":
+    if p.name.upper() != "CLIP_WORD_DICT-1":
         # สร้างโฟลเดอร์หลัก
-        main_path = os.path.join(base_dir, "MOTION_DICT-1")
+        main_path = os.path.join(base_dir, "CLIP_WORD_DICT-1")
         os.makedirs(main_path, exist_ok=True)
     else:
         main_path = base_dir
@@ -148,16 +148,16 @@ def process_single_url(word_url, base_dir):
     return "SUCCESS", f"save word {base_word} at version: {new_variant_key} successed."
 
 def main():
-    base_dir = r"E:\Download\MOTION_DICT-1"
-    url_file = r"E:\Code\Text-to-ThaiSignLanguage\remaining_sign_language.txt"
+    base_dir = r"E:\Download\CLIP_WORD_DICT-1"
+    url_file = r"E:\Code\Text-to-ThaiSignLanguage\all_sign_language_urls.txt"
     # url_file = r"E:\Code\Text-to-ThaiSignLanguage\test_language_urls.txt"
-    error_file = r"E:\Code\Text-to-ThaiSignLanguage\error_log.txt"
+    error_file = r"E:\Code\Text-to-ThaiSignLanguage\error_log01.txt"
 
-    # อ่านลิงก์ทั้งหมดมาเก็บใน List
     if not os.path.exists(url_file):
         print(f"Not found url in {url_file}")
         return
 
+    # อ่านลิงก์ทั้งหมดมาเก็บใน List
     with open(url_file, 'r', encoding='utf-8') as reader:
         urls = [line.strip() for line in reader if line.strip()]
 
@@ -181,10 +181,11 @@ def main():
                     success_count += 1
                 elif status == "SKIPPED":
                     skip_count += 1
+                    err_log.write(f"(SKIPPED) URL: {url}\n | Desp: {msg}")
             except Exception as e:
                 print(f"---> Mistake: {e}")
                 error_count += 1
-                err_log.write(f"URL: {url} | Error: {e}\n")
+                err_log.write(f"(Error) URL: {url} | Error: {e}\n")
 
             time.sleep(1)
     
