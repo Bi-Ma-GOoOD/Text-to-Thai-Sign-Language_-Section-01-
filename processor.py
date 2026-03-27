@@ -81,9 +81,11 @@ def process_sign_language_video(input_video, motion_path):
     mp_holistic = mp.solutions.holistic
 
     with mp_holistic.Holistic(
-        min_detection_confidence = 0.5,
-        min_tracking_confidence = 0.5,
-        model_complexity = 1) as holistic:
+        static_image_mode= False,
+        model_complexity= 2,
+        smooth_landmarks= True,
+        min_detection_confidence = 0.4,
+        min_tracking_confidence = 0.3) as holistic:
 
         frame_idx = 0
         while cap.isOpened():

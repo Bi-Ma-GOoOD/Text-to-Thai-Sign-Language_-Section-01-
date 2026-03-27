@@ -77,7 +77,7 @@ def draw_skeleton(frame, pose_data, left_hand_data, right_hand_data, width, heig
     for rh_connection in HAND_CONNECTIONS:
         pt1, pt2 = rh_connection
         if pt1 in rh_pixels and pt2 in rh_pixels:
-            cv2.line(frame, rh_pixels[pt1], rh_pixels[pt2], (134, 215, 255), 1) # เหลืองอ่อน
+            cv2.line(frame, rh_pixels[pt1], rh_pixels[pt2], (0, 0, 0), 1) # เหลืองอ่อน
 
     return frame
             
@@ -137,32 +137,61 @@ def create_overlay_from_json(input_video_path, motion_json_path, output_overlay_
 
 if __name__ == "__main__":
     print("Executed draw_landmark.py file directly.")
-
     input_video_path_list = [
-        "E:\\Download\\CLIP_WORD_DICT-1\\ข\\เข้าใจ\\v1\\original.mp4",
-        "E:\\Download\\CLIP_WORD_DICT-1\\ค\\เครียด\\v1\\original.mp4",
-        "E:\\Download\\CLIP_WORD_DICT-1\\ง\\เงินกู้\\v1\\original.mp4",
-        "E:\\Download\\CLIP_WORD_DICT-1\\จ\\เจริญ\\v1\\original.mp4"
+        r"E:\Download\Final_CS_Test\Prototype_video\HPV.mp4",
+        r"E:\Download\Final_CS_Test\Prototype_video\Lalamove.mp4",
+        r"E:\Download\Final_CS_Test\Prototype_video\เข้าใจ.mp4",
+        r"E:\Download\Final_CS_Test\Prototype_video\เคเอฟซี.mp4",
+        r"E:\Download\Final_CS_Test\Prototype_video\เงินสด.mp4",
+        r"E:\Download\Final_CS_Test\Prototype_video\เช้า.mp4",
+        r"E:\Download\Final_CS_Test\Prototype_video\เดิน.mp4",
+        r"E:\Download\Final_CS_Test\Prototype_video\เบา.mp4",
+        r"E:\Download\Final_CS_Test\Prototype_video\ใจเย็น.mp4",
+        r"E:\Download\Final_CS_Test\Prototype_video\ไนกี้.mp4",
+        r"E:\Download\Final_CS_Test\Prototype_video\กิน.mp4",
+        r"E:\Download\Final_CS_Test\Prototype_video\ข้าว.mp4",
+        r"E:\Download\Final_CS_Test\Prototype_video\ถั่วงอก.mp4",
+        r"E:\Download\Final_CS_Test\Prototype_video\หนัก.mp4"
     ]
 
     motion_json_path_list = [
-        "E:\\Download\\MOTION_DICT-1\\ข\\เข้าใจ\\v1\\motion.json",
-        "E:\\Download\\MOTION_DICT-1\\ค\\เครียด\\v1\\motion.json",
-        "E:\\Download\\MOTION_DICT-1\\ง\\เงินกู้\\v1\\motion.json",
-        "E:\\Download\\MOTION_DICT-1\\จ\\เจริญ\\v1\\motion.json"
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\HPV.json",
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\Lalamove.json",
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\เข้าใจ.json",
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\เคเอฟซี.json",
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\เงินสด.json",
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\เช้า.json",
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\เดิน.json",
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\เบา.json",
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\ใจเย็น.json",
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\ไนกี้.json",
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\กิน.json",
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\ข้าว.json",
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\ถั่วงอก.json",
+        r"E:\Download\Final_CS_Test\non_pre_process\motion\หนัก.json"
     ]
 
     word_tsl_name_list = [
+        "HPV",
+        "Lalamove",
         "เข้าใจ",
-        "เครียด",
-        "เงินกู้",
-        "เจริญ"
+        "เคเอฟซี",
+        "เงินสด",
+        "เช้า",
+        "เดิน",
+        "เบา",
+        "ใจเย็น",
+        "ไนกี้",
+        "กิน",
+        "ข้าว",
+        "ถั่วงอก",
+        "หนัก"
     ]
 
     for i in range(len(word_tsl_name_list)):
         input_video_path = input_video_path_list[i]
         motion_json_path = motion_json_path_list[i]
-        output_overlay_path = r"E:\Download\OUTPUT_TEST\video"
+        output_overlay_path = r"E:\Download\Final_CS_Test\non_pre_process\overlay"
         word_tsl_name = word_tsl_name_list[i]
         create_overlay_from_json(input_video_path, motion_json_path, output_overlay_path, word_tsl_name)
         
